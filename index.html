@@ -28,38 +28,48 @@
     </div>
 
     <script>
+        // Get the button and text elements
+        var button = document.getElementById("button");
+        var text = document.getElementById("title");
 
+        // Define the text that will be displayed on the button when the message is hidden/shown
+        var textShowMsg = "See Hidden Message ;-)";
+        var textHideMsg = "Hide Message :-(";
+
+        // This function will be called when the button is clicked
         function sendRequest() {
-
-            var button = document.getElementById("button");
-            var text = document.getElementById("title");
-
-            var textShowMsg = "See Hidden Message ;-)";
-            var textHideMsg = "Hide Message :-(";
-
+            // Check if the message is currently hidden or shown
             if (button.innerText == textShowMsg) {
 
+                // Create a new XMLHttpRequest object
                 var request = new XMLHttpRequest();
 
+                // Configure the request
                 request.open('POST', 'backend.php', true);
                 request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
+                // This function will be called when the server responds
                 request.onreadystatechange = function () {
+                    // Change the button text to "Hide Message :-("
                     button.innerHTML = textHideMsg;
+
+                    // Display the response from the server in the text element
                     text.innerText = request.responseText;
                 }
 
+                // Send the request to the server with the username parameter
                 request.send('username=@thesimmons');
 
             } else {
 
+                // Change the button text to "See Hidden Message ;-)"
                 button.innerHTML = textShowMsg;
+
+                // Clear the text element
                 text.innerText = "";
 
             }
-
         }
-
     </script>
 </body>
 
